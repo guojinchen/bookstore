@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xmlns:tx="http://www.springframework.org/schema/tx"
+	     xmlns:aop="http://www.springframework.org/schema/aop"
+	     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	
+	<!-- dao层的配置 -->
+	<bean id="BooksDao" class="com.bookstore.dao.impl.BooksDaoImpl">
+		<!--UserDao是一个接口，UserDaoImpl为其实现类，并且该类继承HibernatedaoSupport,HibernatedaoSupport是spring提供的一个支持类，里面提供了和原生Hibernate类似的对Session的CRUD操作.
+		HibernatedaoSupport中有一个成员变量sessionFactory， ref="sessionFactory"引用的是applicationContext-common.xml中配置的bean id="sessionFactory"
+		HibernatedaoSupport用法见com.chinasofti.dao.impl.UserDaoImpl类
+		-->
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+		<bean id="AdminsDao" class="com.bookstore.dao.impl.AdminsDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+		<bean id="VipsDao" class="com.bookstore.dao.impl.VipsDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+		<!--<bean id="ViptypesDao" class="com.bookstore.dao.impl.ViptypesDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+			--><bean id="BookAdjustDao" class="com.bookstore.dao.impl.BookAdjustDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+			<bean id="BookTypesDao" class="com.bookstore.dao.impl.BookTypesDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+			<bean id="OrderListDao" class="com.bookstore.dao.impl.OrderListDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+				<bean id="OrdersDao" class="com.bookstore.dao.impl.OrdersDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+				<bean id="ShoppingCarDao" class="com.bookstore.dao.impl.ShoppingCarDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+		<bean id="NoticeDao" class="com.bookstore.dao.impl.NoticeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+		<bean id="AdviceDao" class="com.bookstore.dao.impl.AdviceDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+</beans>

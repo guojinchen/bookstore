@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xmlns:tx="http://www.springframework.org/schema/tx"
+	     xmlns:aop="http://www.springframework.org/schema/aop"
+	     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+	
+	<!--spring的主配置文件，spring的配置文件可以分多个，类似struts。本配置文件配置连接数据库的连接池，生成SessionFactory，事务管理，传播特性，AOP等 -->
+	<!--该主配置文件基本上是固定配置，每个ssh项目都会用到 -->
+	
+	<!-- 配置连接池 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver"></property>
+		<!--用户名、密码、url、最大最小连接数 -->
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:orcl"></property>
+		<property name="user" value="lily"></property>
+		<property name="password" value="abc"></property>
+		<property name="maxPoolSize" value="20"></property>
+		<property name="minPoolSize" value="1"></property>
+	</bean>
+	
+	<!-- 配置sessionfactory -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+		<!--  引入hibernate映射文件，引入之后可以不需要hibernate.cfg.xml -->
+		<property name="mappingResources">
+			<list>
+				<value>com/bookstore/bean/ShoppingCar.hbm.xml</value>
+				<!-- <value>com/bookstore/bean/VipTypes.hbm.xml   </value> -->
+				<value>com/bookstore/bean/Vips.hbm.xml       </value>
+				<value>com/bookstore/bean/OrderList.hbm.xml  </value>
+				<value>com/bookstore/bean/Books.hbm.xml      </value>
+				<value>com/bookstore/bean/Admins.hbm.xml     </value>
+				<value>com/bookstore/bean/Orders.hbm.xml     </value>
+				<value>com/bookstore/bean/BookTypes.hbm.xml  </value>
+				<value>com/bookstore/bean/BookAdjust.hbm.xml </value>
+				<value>com/bookstore/bean/Notices.hbm.xml </value>
+				<value>com/bookstore/bean/Advice.hbm.xml </value>
+			</list>
+		</property>
+	
+		<!--<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
+	--></bean>
+	
+	<!-- 配置事物管理器 -->
+	<bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	
+	<!-- 配置事物的传播特性 -->
+	<!--配置serviece层以类似add*,delete*,update*等命名的方法都支持事务 -->
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- 哪些类的哪些方法参与事物 -->
+	<!--com.chinasofti.service包的所有类的方法参与事务-->
+	<aop:config>
+		<aop:pointcut id="allManagetMethod" expression="execution(* com.bookstore.service.*.*(..)) || execution(* com.bookstore.service.*.*.*(..)) " />
+		<aop:advisor pointcut-ref="allManagetMethod" advice-ref="txAdvice" />
+	</aop:config>
+
+	
+</beans>

@@ -1,0 +1,32 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<!-- 配置SessionFactory的属性 -->
+		<property name="hibernate.connection.driver_class">
+			oracle.jdbc.driver.OracleDriver
+		</property>
+		<property name="hibernate.connection.url">
+			jdbc:oracle:thin:@localhost:1521:orcl
+		</property>
+		<property name="hibernate.connection.username">lily</property>
+		<property name="hibernate.connection.password">abc</property>
+		<property name="hibernate.dialect">
+			org.hibernate.dialect.OracleDialect
+		</property>
+		<property name="hibernate.show_sql">true</property>
+		<mapping resource="com/bookstore/bean/ShoppingCar.hbm.xml" />
+		<mapping resource="com/bookstore/bean/Vips.hbm.xml" />
+		<mapping resource="com/bookstore/bean/OrderList.hbm.xml" />
+		<mapping resource="com/bookstore/bean/Books.hbm.xml" />
+		<mapping resource="com/bookstore/bean/Admins.hbm.xml" />
+		<mapping resource="com/bookstore/bean/Orders.hbm.xml " />
+		<mapping resource="com/bookstore/bean/BookTypes.hbm.xml " />
+		<mapping resource="com/bookstore/bean/BookAdjust.hbm.xml " />
+		<mapping resource="com/bookstore/bean/Notices.hbm.xml " />
+		<mapping resource="com/bookstore/bean/Advice.hbm.xml " />
+		<!-- <mapping resource="com/bookstore/bean/Orderlist.hbm.xml" /> -->
+	</session-factory>
+</hibernate-configuration>

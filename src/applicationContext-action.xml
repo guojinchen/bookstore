@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xmlns:tx="http://www.springframework.org/schema/tx"
+	     xmlns:aop="http://www.springframework.org/schema/aop"
+	     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	
+	<!-- action层的配置 -->
+	<bean id="firstAction" class="com.bookstore.action.FirstAction" scope="prototype">
+		<!--见com.chinasofti.action.LoginAction类， 该类中有一个类型为UserService，名为userService的成员变量。
+		此处的name="userService"对应成员变量名，ref="UserService"指向applicationContext-service.xml中配置的bean id="UserService"，下同
+		-->
+		<property name="bookTypesService" ref="BookTypesService"></property>
+		<property name="booksService" ref="BooksService"></property>
+		<property name="noticeService" ref="NoticeService"></property>
+	</bean>
+	
+	
+	
+	<bean id="booksAction" class="com.bookstore.action.BooksAction" scope="prototype">
+		<property name="booksService" ref="BooksService"></property>
+		<property name="bookTypesService" ref="BookTypesService"></property>
+	</bean>
+	
+	<bean id="vipsAction" class="com.bookstore.action.VipsAction" scope="prototype">
+		<property name="vipsService" ref="VipsService"></property>
+	</bean>
+	
+	<bean id="adminsAction" class="com.bookstore.action.AdminsAction" scope="prototype">
+		<property name="adminsService" ref="AdminsService"></property>
+	</bean>
+	
+	<!--<bean id="vipTypesAction" class="com.bookstore.action.VipTypesAction" scope="prototype">
+		<property name="vipTypesService" ref="VipTypesService"></property>
+	</bean>
+	
+		--><bean id="bookAdjustAction" class="com.bookstore.action.BookAdjustAction" scope="prototype">
+		<property name="bookAdjustService" ref="BookAdjustService"></property>
+	</bean>
+	
+		<bean id="bookTypesAction" class="com.bookstore.action.BookTypesAction" scope="prototype">
+		<property name="bookTypesService" ref="BookTypesService"></property>
+	</bean>
+	
+				<bean id="orderListAction" class="com.bookstore.action.OrderListAction" scope="prototype">
+		<property name="orderListService" ref="OrderListService"></property>
+	</bean>
+	
+					<bean id="ordersAction" class="com.bookstore.action.OrdersAction" scope="prototype">
+		<property name="ordersService" ref="OrdersService"></property>
+		<property name="orderListService" ref="OrderListService"></property>
+	</bean>
+	
+						<bean id="shoppingCarAction" class="com.bookstore.action.ShoppingCarAction" scope="prototype">
+		<property name="shoppingCarService" ref="ShoppingCarService"></property>
+	</bean>
+	
+	
+						<bean id="detailsAction" class="com.bookstore.action.DetailsAction" scope="prototype">
+		<property name="booksService" ref="BooksService"></property>
+	</bean>
+	
+		<bean id="typelistAction" class="com.bookstore.action.TypeBookAction" scope="prototype">
+		<property name="booksService" ref="BooksService"></property>
+	</bean>
+	
+			<bean id="publisherBookAction" class="com.bookstore.action.publisherBookAction" scope="prototype">
+		<property name="booksService" ref="BooksService"></property>
+	</bean>
+	
+				<bean id="menusAction" class="com.bookstore.action.MenusAction" scope="prototype">
+		<property name="booksService" ref="BooksService"></property>
+	</bean>
+	
+			<bean id="registerAction" class="com.bookstore.action.RegisterAction" scope="prototype">
+		<property name="vipsService" ref="VipsService"></property>
+	</bean>
+	
+	<bean id="loginAction" class="com.bookstore.action.LoginAction" scope="prototype">
+		<property name="vipsService" ref="VipsService"></property>
+	</bean>
+	
+	<bean id="addcarAction" class="com.bookstore.action.CarAction" scope="prototype">
+		<property name="booksService" ref="BooksService"></property>
+
+	</bean>
+	
+	<bean id="isLoginAction" class="com.bookstore.action.IsLoginAction" scope="prototype">
+	<property name="vipsService" ref="VipsService"></property>
+	<property name="booksService" ref="BooksService"></property>
+	<property name="shoppingCarService" ref="ShoppingCarService"></property>
+	</bean>
+	
+		<bean id="addorderAction" class="com.bookstore.action.OrderAddAction" scope="prototype">
+		<property name="ordersService" ref="OrdersService"></property>
+		<property name="vipsService" ref="VipsService"></property>
+		<property name="orderListService" ref="OrderListService"></property>
+		<property name="booksService" ref="BooksService"></property>
+	<property name="shoppingCarService" ref="ShoppingCarService"></property>
+		
+	</bean>
+	
+	
+		<bean id="uploadPicture" class="com.bookstore.action.uploadPictureAction" scope="prototype">
+		<property name="booksService" ref="BooksService"></property>
+	</bean>
+	
+			<bean id="adviceAction" class="com.bookstore.action.AdviceAction" scope="prototype">
+		<property name="adviceService" ref="AdviceService"></property>
+	</bean>
+	
+				<bean id="noticeAction" class="com.bookstore.action.NoticeAction" scope="prototype">
+		<property name="noticeService" ref="NoticeService"></property>
+	</bean>
+	
+		<bean id="loginoutAction" class="com.bookstore.action.LoginOutAction" scope="prototype">
+	</bean>
+</beans>

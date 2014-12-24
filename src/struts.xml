@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+ 	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.objectFactory" value="spring"></constant>
+   
+    
+
+    <package name="default" extends="struts-default" namespace="/">
+    
+     <interceptors>
+    	     <interceptor name="myceptor" class="com.bookstore.util.LoginInterceptor" />
+    </interceptors>
+		<!-- when login do this -->
+    	<action name="first" class="firstAction"  >
+    		<result name="success">
+    			/index.jsp
+    		</result>    		
+    	</action>
+	<!-- when see the book's details do this -->
+	    	    	<action name="details" class="detailsAction"  >
+    		<result name="success">
+    			/details.jsp
+    		</result>    		
+    	</action>	
+	<!-- list  by book type -->
+	 	<action name="typelist" class="typelistAction"  >
+    		<result name="success">
+    			/typebook.jsp
+    		</result>    		
+    	</action>	
+	
+	<!-- list by book publisher -->
+	 	<action name="publisherlist" class="publisherBookAction"  >
+    		<result name="success">
+    			/publisherbook.jsp
+    		</result>    		
+    	</action>	
+    		<action name="find" class="publisherBookAction"  method="findbook" >
+    		<result name="success">
+    			/publisherbook.jsp
+    		</result>    		
+    	</action>
+	
+	<!-- menus operation -->
+		 	<action name="newbook" class="menusAction" method="newbooks" >
+    		<result name="success">
+    			/newbook.jsp
+    		</result>    		
+    	</action>	
+	<action name="sortbook" class="menusAction" method="sortbook"  >
+    		<result name="success">
+    			/sortbook.jsp
+    		</result>    		
+    	</action>	
+    	<action name="specialbook" class="menusAction" method="specialbook" >
+    		<result name="success">
+    			/specialbook.jsp
+    		</result>    		
+    	</action>	
+	<!-- register -->
+	<action name="register" class="registerAction"  method="registerter">
+    		<result name="success">
+    			/success.jsp
+    		</result>    		
+    	</action>	
+    	<action name="registertwo" class="registerAction"  method="registertwo">
+    		<!--<result name="success">
+    			/register.jsp
+    		</result>    		
+    	--></action>	
+    		
+    <!-- vip login -->
+    <action name="login" class="loginAction"  >
+    		<result name="success">
+    			/success.jsp
+    		</result>   
+    		<result name="fail">
+    			/login.jsp
+    		</result>     		
+    	</action>
+        <!-- admin login -->
+    <action name="mainlogin" class="adminsAction" method="adminLogin"  >
+  
+    	<result name="success">
+    			/main.jsp
+    		</result>   
+    		<result name="fail">
+    			/mainlogin.jsp
+    		</result><!--
+    		   <interceptor-ref name="myceptor"/>  
+    		   		
+    	--></action>	
+    		
+	<!-- add shoppingcar -->
+	    <action name="addcar" class="addcarAction" method="addCar"  >
+    		<result name="success">
+    			/shoppingcar.jsp
+    		</result>   		
+    	</action>	
+	 	<action name="delcar" class="addcarAction" method="delCar"  >
+    		<result name="success">
+    			/shoppingcar.jsp
+    		</result>   		
+    	</action>	
+	<!-- is login -->
+		 	<action name="islogin" class="isLoginAction" >
+    		<result name="success">
+    			/order.jsp
+    		</result>   
+    		<result name="fail">
+    		/login.jsp
+    		</result>
+    <!-- add order -->		
+    	</action>	
+			 	<action name="addorder" class="addorderAction" method="addOrderInfo">
+    		<result name="success">
+    			/orderlist.jsp
+    		</result>   
+    	</action>	
+	
+	
+	
+	
+	
+	
+	<!-- operation   add  delete  update   query -->
+<!--  book  -->
+	<action name="viewbook" class="booksAction" method="queryAllBooks" >
+    		<result name="success">
+    			/BookInfo.jsp
+    		</result>    		
+    </action>
+    <action name="delbook" class="booksAction" method="deleteBooks" >
+    		<result name="success">
+    			/BookInfo.jsp
+    		</result>    		
+    </action>
+    	<!-- query one book -->	
+    <action name="updatebook" class="booksAction" method="queryOneBook">
+	      <result name="success">
+	      /updatebook.jsp
+	      </result>
+    </action>	
+     	  <!-- update book info -->
+   <action name="relupdatebook" class="booksAction" method="updateBooks">
+	      <result name="success">
+	      /seccuss.jsp
+	      </result>
+    </action>	
+    
+    	<!-- upload pictures -->
+    <action name="uploadPicture" class="uploadPicture">
+       <!-- Struts2内置的文件上传拦截器 -->
+        <interceptor-ref name="myceptor"/>  
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">image/bmp,image/png,image/gif,image/jpeg</param>
+                <param name="maximumSize">2048000</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack" />
+            <param name="savePath">/upload</param>
+            <result>/uploadSuccess.jsp</result>
+            <result name="input">/updatebook.jsp</result>
+   </action>
+    
+	    <!-- add books -->
+    <action name="addbook" class="booksAction" method="addBooks">
+	       <result>
+	       /addbookimage.jsp
+	       </result>
+	</action>
+	    	
+  <!--  order  -->
+	<action name="vieworder" class="ordersAction" method="queryAllOrders" >
+    		<result name="success">
+    			/orderInfo.jsp
+    		</result>    		
+    </action>  	
+    	
+     <action name="updateorder" class="ordersAction" method="queryOneOrders">
+	      <result name="success">
+	      /updateorder.jsp
+	      </result>
+    </action>	
+     	  <!-- update order info -->
+   <action name="relupdateorder" class="ordersAction" method="updateOrders">
+   <interceptor-ref name="myceptor"/>  
+	      <result name="success">
+	      /main.jsp
+	      </result>
+    </action>		
+   <action name="orderdetail" class="ordersAction" method="ordersDetail">
+	      <result name="success">
+	      /orderdetail.jsp
+	      </result>
+    </action>	
+   <action name="delorder" class="ordersAction" method="deleteOrders">
+	      <result name="success">
+	      /orderInfo.jsp
+	      </result>
+    </action>
+       <action name="findOrder" class="ordersAction" method="queryone">
+	      <result name="success">
+	      /orderInfo.jsp
+	      </result>
+    </action>
+    
+    <!-- my orders -->
+      <action name="myorder" class="ordersAction" method="myOrders">
+	      <result name="success">
+	      /myorders.jsp
+	      </result>
+	      <result name="fail">
+	      /login.jsp
+	      </result>
+    </action>
+     <action name="updatemyorder" class="ordersAction" method="queryOneOrders">
+	      <result name="success">
+	      /updatemyorder.jsp
+	      </result>
+    </action>	
+     	
+   <action name="relupdatemyorder" class="ordersAction" method="updateOrders">
+	      <result name="success">
+	      /beforeIndex.jsp
+	      </result>
+    </action>		
+   <action name="myorderdetail" class="ordersAction" method="ordersDetail">
+	      <result name="success">
+	      /myorderdetail.jsp
+	      </result>
+    </action>	
+   <action name="delmyorder" class="ordersAction" method="deleteOrders">
+	      <result name="success">
+	      /beforeIndex.jsp
+	      </result>
+    </action>
+    	
+<!-- vips -->
+	<action name="viewvip" class="vipsAction" method="queryAllVip">
+		      <result name="success">
+		      /vipInfo.jsp
+		      </result>
+	 </action>
+	 <action name="delvip" class="vipsAction" method="deleteVips">
+		      <result name="success">
+		      /vipInfo.jsp
+		      </result>
+	 </action>
+	 	 <action name="updatevip" class="vipsAction" method="queryVip">
+		      <result name="success">
+		      /updatevip.jsp
+		      </result>
+	 </action>
+	  <action name="preupdatevip" class="vipsAction" method="queryVip">
+		      <result name="success">
+		      /updateVips.jsp
+		      </result>
+	 </action>
+	 
+	 
+     <action name="relupdatevip" class="vipsAction" method="updateVip">
+     
+		      <result name="success">
+		      /main.jsp
+		      </result>
+	 </action>
+	 
+	  <action name="relupdatevips" class="vipsAction" method="updateVip">
+     
+		      <result name="success">
+		      /indexupdate.jsp
+		      </result>
+	 </action>
+	 
+	 <action name="addvip" class="vipsAction" method="addVips">
+		      <result name="success">
+		      /addvip.jsp
+		      </result>
+	 </action>
+	 
+	 <!-- Advice -->
+	       <action name="queryadvice" class="adviceAction" method="queryAll">
+		      <result name="success">
+		      /adviceInfo.jsp
+		      </result>
+		       </action>
+		 <action name="addadvice" class="adviceAction" method="addAdvice">
+		      <result name="success">
+		      /beforeIndex.jsp
+		      </result>
+		       </action>
+		    <action name="deladvice" class="adviceAction" method="delAdvice">
+		      <result name="success">
+		      /adviceInfo.jsp
+		      </result>
+	 </action>
+	 
+	 <!-- Notice -->
+	 	 <action name="viewnotice" class="noticeAction" method="queryAll">
+		      <result name="success">
+		      /noticeInfo.jsp
+		      </result>
+	 </action>
+	 <action name="delnotice" class="noticeAction" method="delNotice">
+		      <result name="success">
+		      /noticeInfo.jsp
+		      </result>
+	 </action>
+	  <action name="addnotice" class="noticeAction" method="addNotice">
+		      <result name="success">
+		      /addnotice.jsp
+		      </result>
+	 </action> 
+	 <action name="updatenotice" class="noticeAction" method="queryOne">
+		      <result name="success">
+		      /updatenotice.jsp
+		      </result>
+	 </action>
+	  <action name="relupdatenotice" class="noticeAction" method="updateNotice">
+		      <result name="success">
+		      /noticeInfo.jsp
+		      </result>
+	 </action>
+	 
+	 <!-- login out -->
+	 	  <action name="LoginOut" class="loginoutAction" >
+		      <result name="success">
+		      /loginout.jsp
+		      </result>
+	 </action>
+	 
+    </package>
+
+</struts>

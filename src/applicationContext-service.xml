@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xmlns:tx="http://www.springframework.org/schema/tx"
+	     xmlns:aop="http://www.springframework.org/schema/aop"
+	     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	
+	<!-- Service层的配置 -->
+	<bean id="BooksService" class="com.bookstore.service.impl.BooksServiceImpl">
+	<!--见com.chinasofti.service.impl.UserServiceImpl类， 该类中有一个类型为UserDao，名为userDao的成员变量。
+		此处的name="userDao"对应成员变量名，ref="UserDao"指向applicationContext-dao.xml中配置的bean id="UserDao"
+		-->
+		<property name="booksDao" ref="BooksDao"></property>
+	</bean>
+	
+	<bean id="AdminsService" class="com.bookstore.service.impl.AdminsServiceImpl">
+		<property name="adminsDao" ref="AdminsDao"></property>
+	</bean>
+	
+	<bean id="VipsService" class="com.bookstore.service.impl.VipsServiceImpl">
+		<property name="vipsDao" ref="VipsDao"></property>
+	</bean>
+	
+	<!--<bean id="VipTypesService" class="com.bookstore.service.impl.VipTypesServiceImpl">
+		<property name="viptypesDao" ref="ViptypesDao"></property>
+	</bean>
+	
+		--><bean id="BookAdjustService" class="com.bookstore.service.impl.BookAdjustServiceImpl">
+		<property name="bookAdjustDao" ref="BookAdjustDao"></property>
+	</bean>
+	
+			<bean id="BookTypesService" class="com.bookstore.service.impl.BookTypesServiceImpl">
+		<property name="bookTypesDao" ref="BookTypesDao"></property>
+	</bean>
+	
+				<bean id="OrderListService" class="com.bookstore.service.impl.OrderListServiceImpl">
+		<property name="orderListDao" ref="OrderListDao"></property>
+	</bean>
+	
+				<bean id="OrdersService" class="com.bookstore.service.impl.OrdersServiceImpl">
+		<property name="ordersDao" ref="OrdersDao"></property>
+	</bean>
+	
+	<bean id="ShoppingCarService" class="com.bookstore.service.impl.ShoppingCarServiceImpl">
+		<property name="shoppingCarDao" ref="ShoppingCarDao"></property>
+	</bean>
+	
+	<bean id="NoticeService" class="com.bookstore.service.impl.NoticeServiceImpl">
+		<property name="noticeDao" ref="NoticeDao"></property>
+	</bean>
+		<bean id="AdviceService" class="com.bookstore.service.impl.AdviceServiceImpl">
+		<property name="adviceDao" ref="AdviceDao"></property>
+	</bean>
+</beans>

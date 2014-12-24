@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+    
+<struts>	
+
+	<package name="default" extends="struts-default">
+
+		<action name="LoginAction" class="com.chinasofti.a.LoginAction" >
+		
+			<!-- Struts2内置的文件上传拦截器 -->
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">image/bmp,image/png,image/gif,image/jpeg</param>
+                <param name="maximumSize">2048000</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack" />
+            <param name="savePath">/upload</param>
+            <result>/success.jsp</result>
+            <result name="input">/input.jsp</result>
+		</action>
+	</package>
+</struts>
